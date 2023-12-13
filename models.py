@@ -113,9 +113,9 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 
-class BigCNN(nn.Module):
+class BigCNN2(nn.Module):
     def __init__(self):
-        super(BigCNN, self).__init__()
+        super().__init__()
         # More convolutional layers with increased filters
         self.conv1 = nn.Conv2d(1, 10, 3, padding=1)
         self.bn1 = nn.BatchNorm2d(10)
@@ -149,4 +149,14 @@ class BigCNN(nn.Module):
         x = self.dropout(F.relu(self.fc3(x)))
         x = self.fc4(x)
         return x
+    
+    def train_model(self, loader, epochs=10):
+        _train_model(self, loader, epochs)
+
+    def predictOnData(self, dataLoader):
+        return _predictOnData(self, dataLoader)
+
+    def adjust_dropout(self, new_p):
+        _adjust_dropout(self, new_p)
+
 
